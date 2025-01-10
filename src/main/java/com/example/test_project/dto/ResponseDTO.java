@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,4 +18,7 @@ public class ResponseDTO<T> implements Serializable {
     private String message;
 
     private LocalDateTime timestamp;
+
+    public void setErrors(List<String> collect) {
+    }
 }
