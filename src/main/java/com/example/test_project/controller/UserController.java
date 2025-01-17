@@ -17,6 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @PostMapping
     public ResponseEntity<ResponseDTO> createUser(@Valid @RequestBody UserRequestDTO userRequestDTO, BindingResult bindingResult){
         log.info("UserController.createUser() method accessed..");
@@ -30,8 +31,8 @@ public class UserController {
         ResponseDTO responseDTO = userService.getUserList();
         return ResponseEntity.status(responseDTO.getStatus()).body(responseDTO);
     }
-    @GetMapping
-    public ResponseEntity<ResponseDTO> getUserById(@PathVariable Integer userId){
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseDTO> getUserById(@PathVariable("id") Integer userId){
         log.info("UserController.getUserById() method accessed..");
         ResponseDTO responseDTO = userService.getUserById(userId);
         return ResponseEntity.status(responseDTO.getStatus()).body(responseDTO);
