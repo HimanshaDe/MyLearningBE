@@ -6,10 +6,7 @@ import com.example.test_project.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/course")
@@ -22,8 +19,15 @@ public class CourseController {
     @PostMapping
     public ResponseEntity<ResponseDTO> saveCourse (@RequestBody CourseRequestDTO courseRequestDTO){
         log.info("CourseController.saveCourse method accessed..");
-
         ResponseDTO responseDTO = courseService.saveCourse(courseRequestDTO);
         return ResponseEntity.status((responseDTO.getStatus())).body(responseDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<ResponseDTO> getCourses(){
+        log.info("CourseController.getCourses method accessed..");
+        ResponseDTO responseDTO = courseService.getCourses();
+        return ResponseEntity.status((responseDTO.getStatus())).body(responseDTO);
+
     }
 }

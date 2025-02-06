@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,19 @@ public class CourseServiceIMPL implements CourseService {
             ResponseUtil.handleCreateResponse(responseDTO,course,"Course Created Successfully");
         }
 
+        return responseDTO;
+    }
+
+    @Override
+    public ResponseDTO getCourses() {
+        ResponseDTO responseDTO = new ResponseDTO<>();
+        List<Course> courses = courseRepository.findAll();
+
+        if(courses.isEmpty()){
+            ResponseUtil.handleNotFoundResponse(responseDTO,"Course list is empty");
+        }else{
+            ResponseUtil.handleOkResponse(responseDTO,courses,"User List retrieved successfully ");
+        }
         return responseDTO;
     }
 }

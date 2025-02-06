@@ -5,4 +5,6 @@ import com.example.test_project.dto.requestDTOs.CourseRequestDTO;
 
 public interface CourseService {
     ResponseDTO saveCourse(CourseRequestDTO courseRequestDTO);
+
+    ResponseDTO getCourses();
 }
