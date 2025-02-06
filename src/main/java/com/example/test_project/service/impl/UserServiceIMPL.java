@@ -34,7 +34,7 @@ public class UserServiceIMPL implements UserService, UserDetailsService {
     private UserValidator userValidator;
     @Override
     public ResponseDTO createUser(UserRequestDTO userRequestDTO, BindingResult bindingResult) {
-        ResponseDTO responseDTO = new ResponseDTO();
+        ResponseDTO responseDTO = new ResponseDTO<>();
 
         // Check if the email already exists
         Optional<User> existingUser = userRepository.findByEmail(userRequestDTO.getEmail());

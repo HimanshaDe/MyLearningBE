@@ -18,10 +18,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/api/users/**").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/course/**").permitAll()
+                        .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf.disable())
                 .formLogin(form -> form.disable())
