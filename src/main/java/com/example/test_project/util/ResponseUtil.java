@@ -43,4 +43,11 @@ public class ResponseUtil {
         responseDTO.setTimestamp(LocalDateTime.now());
         return responseDTO;
     }
+    public static ResponseDTO handleIncorrectEntityResponse(ResponseDTO responseDTO, String message) {
+        responseDTO.setData(null);
+        responseDTO.setMessage(message);
+        responseDTO.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+        responseDTO.setTimestamp(LocalDateTime.now());
+        return responseDTO;
+    }
 }
