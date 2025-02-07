@@ -7,4 +7,9 @@ public interface CourseService {
     ResponseDTO saveCourse(CourseRequestDTO courseRequestDTO);
 
     ResponseDTO getCourses();
+
+    ResponseDTO updateCourse(CourseRequestDTO courseRequestDTO, Integer id);
+
+    ResponseDTO getCourseById(Integer id);
+
 }

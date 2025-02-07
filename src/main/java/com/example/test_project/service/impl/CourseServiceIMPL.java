@@ -6,6 +6,7 @@ import com.example.test_project.entity.Course;
 import com.example.test_project.repository.CourseRepository;
 import com.example.test_project.service.CourseService;
 import com.example.test_project.util.ResponseUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class CourseServiceIMPL implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
@@ -52,4 +54,40 @@ public class CourseServiceIMPL implements CourseService {
         }
         return responseDTO;
     }
+
+    @Override
+    public ResponseDTO updateCourse(CourseRequestDTO courseRequestDTO, Integer id) {
+        log.info("CourseServiceIMPL.updateCourse() method accessed..");
+        ResponseDTO responseDTO = new ResponseDTO<>();
+
+        Optional<Course> courseOptional = courseRepository.findById(id);
+        if(courseOptional.isEmpty()){
+            return ResponseUtil.handleNotFoundResponse(responseDTO,"Course not found");
+        }
+        Course currentCourse = courseOptional.get();
+        currentCourse.setTitle(courseRequestDTO.getTitle());
+        currentCourse.setDescription(courseRequestDTO.getDescription());
+        courseRepository.save(currentCourse);
+        ResponseUtil.handleCreateResponse(responseDTO,currentCourse,"Course updated successfully");
+        return responseDTO;
+    }
+
+    @Override
+    public ResponseDTO getCourseById(Integer id) {
+        log.info("CourseServiceIMPL.getCourseById() method accessed..");
+        ResponseDTO responseDTO = new ResponseDTO<>();
+
+        Optional<Course> courseOptional = courseRepository.findById(id);
+
+        if(courseOptional.isEmpty()){
+             ResponseUtil.handleNotFoundResponse(responseDTO,"Course not found");
+        }
+        else {
+            ResponseUtil.handleOkResponse(responseDTO,courseOptional.get(),"Course retrieved successfully");
+        }
+
+        return responseDTO;
+    }
+
+
 }

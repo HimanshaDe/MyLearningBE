@@ -37,4 +37,6 @@ public class UserController {
         ResponseDTO responseDTO = userService.getUserById(userId);
         return ResponseEntity.status(responseDTO.getStatus()).body(responseDTO);
     }
+
+
 }
