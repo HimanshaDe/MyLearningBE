@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,8 +27,10 @@ public class Quiz {
     private String question;
     @Column(nullable = false)
     private String answer;
-    @Column(nullable = false)
-    private String options;
+    @ElementCollection
+    @CollectionTable(name = "quiz_options", joinColumns = @JoinColumn(name = "quiz_id"))
+    @Column(name = "option")
+    private List<String> options;
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 

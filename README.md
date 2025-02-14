@@ -21,3 +21,6 @@ This is a **Spring Boot-based web application** that includes RESTful APIs, Post
 ### 1️⃣ Prerequisites
 - Install **Java 17** & **Maven**
 - Install **PostgreSQL** and create a database
+
+### Swagger
+http://localhost:8081/swagger-ui/index.html#
