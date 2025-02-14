@@ -1,6 +1,7 @@
 package com.example.test_project.entity;
 
 import com.example.test_project.enums.Role;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +42,7 @@ public class User implements UserDetails {
     private Timestamp createdAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Enrollement> enrollements;
 
 

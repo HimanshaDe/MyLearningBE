@@ -1,5 +1,6 @@
 package com.example.test_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,12 +32,15 @@ public class Course {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Assignment> assignments;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Quiz> quizzes;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Enrollement> enrollements;
 
 }

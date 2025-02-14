@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,7 +20,7 @@ public class QuizRequestDTO {
 
     private String answer;
 
-    private List<String> options;
+    private List<String> options = new ArrayList<>();
 
     private LocalDateTime createdAt;
 }

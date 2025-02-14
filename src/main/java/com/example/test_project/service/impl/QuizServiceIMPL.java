@@ -26,11 +26,15 @@ public class QuizServiceIMPL implements QuizService {
     public ResponseDTO saveQuiz(QuizRequestDTO quizRequestDTO) {
         ResponseDTO responseDTO = new ResponseDTO<>();
         Optional<Course> course= courseRepository.findById(quizRequestDTO.getCourse());
-        Optional<Course> existingQuiz = quizRepository.findByQuestion(quizRequestDTO.getQuestion());
+        Optional<Quiz> existingQuiz = quizRepository.findByQuestion(quizRequestDTO.getQuestion());
+        if (quizRequestDTO.getOptions() == null || !quizRequestDTO.getOptions().contains(quizRequestDTO.getAnswer())) {
+            return ResponseUtil.handleErrorResponse(responseDTO, "Answer does not match any of the options");
+        }
         if(existingQuiz.isPresent()){
             return ResponseUtil.handleConflictResponse(responseDTO,"Question is already in use");
         }
         else{
+
             Quiz quiz = new Quiz();
             quiz.setCourse(course.get());
             quiz.setQuestion(quizRequestDTO.getQuestion());
